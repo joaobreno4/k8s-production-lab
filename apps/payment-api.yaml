@@ -18,7 +18,7 @@ spec:
       containers:
       - name: api
         # Imagem perfeita de lab que responde na porta 8080 e nos permite simular testes de estresse
-        image: vishnunavan/stress
+        image: vishnunielsen/stress
         ports:
         - containerPort: 8080
         
