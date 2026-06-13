@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: api
-        # Imagem oficial da Google estável e perfeita para testes de carga e resiliência
-        image: registry.k8s.io/stress-ng
+        # Imagem oficial da Google com a tag de versão explícita para evitar o erro de 'latest'
+        image: registry.k8s.io/stress-ng:v0.17.03
         ports:
         - containerPort: 8080
         args:
@@ -27,7 +27,7 @@ spec:
         - --timeout
         - "60s"
         
-        # 🟢 1. LIMITES DE RECURSOS (Governação do Cluster)
+        # 🟢 1. LIMITES DE RECURSOS (Governança do Cluster)
         resources:
           requests:
             memory: "50Mi"
@@ -37,8 +37,7 @@ spec:
             cpu: "200m"    # Se tentar usar mais de 20%, o K8s estrangula a CPU
 
         # 🟢 2. SONDAS DE SAÚDE (Ciclo de Vida)
-        # Nota: Como o stress-ng não é um servidor web com HTTP por padrão, 
-        # mudamos as Probes para checar o processo interno do container de forma robusta
+        # Como o stress-ng não roda HTTP nativo, usamos sondas baseadas no processo interno
         readinessProbe:
           exec:
             command:
