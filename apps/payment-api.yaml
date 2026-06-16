@@ -24,8 +24,6 @@ spec:
         args:
         - --cpu
         - "1"
-        - --timeout
-        - "60s"
         
         # 🟢 1. LIMITES DE RECURSOS (Governança do Cluster)
         resources:
