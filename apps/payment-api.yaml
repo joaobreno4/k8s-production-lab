@@ -17,8 +17,7 @@ spec:
     spec:
       containers:
       - name: api
-        # Imagem oficial da Google com a tag de versão explícita para evitar o erro de 'latest'
-        image: registry.k8s.io/stress-ng:v0.17.03
+        image: polinux/stress-ng
         ports:
         - containerPort: 8080
         args:
@@ -39,14 +38,14 @@ spec:
         readinessProbe:
           exec:
             command:
-            - pidof
+            - pgrep
             - stress-ng
           initialDelaySeconds: 3
           periodSeconds: 5
         livenessProbe:
           exec:
             command:
-            - pidof
+            - pgrep
             - stress-ng
           initialDelaySeconds: 5
           periodSeconds: 10
