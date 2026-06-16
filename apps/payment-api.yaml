@@ -6,7 +6,7 @@ metadata:
   labels:
     app: payment-api
 spec:
-  replicas: 2 # Começamos com duas réplicas para garantir Alta Disponibilidade
+  replicas: 0 # Zerado após teste de HPA para poupar recursos do lab local
   selector:
     matchLabels:
       app: payment-api
